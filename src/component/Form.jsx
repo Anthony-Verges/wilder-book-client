@@ -4,15 +4,26 @@ import axios from "axios";
 const Form = () => {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/api/wilders", {
-      name: name,
-      city: city,
-    });
-    setName("");
-    setCity("");
+    try {
+      const result = await axios.post("http://localhost:5000/api/wilders", {
+        name,
+        city,
+      });
+      console.log(result);
+      if (result.data.success) {
+        setError("");
+      }
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.message);
+      } else {
+        setError(error.message);
+      }
+    }
   };
   return (
     <div>
@@ -105,6 +116,7 @@ const Form = () => {
           value={city}
           onChange={(e) => setCity(e.target.value)}
         />
+        {error !== "" && <div style={{ color: "red" }}>{error}</div>}
         <button
           style={{
             textAlign: "center",
