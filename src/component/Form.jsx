@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Form = () => {
   const [name, setName] = useState("");
@@ -43,6 +44,16 @@ const Form = () => {
         >
           Ajouter un nouveau Wilder
         </h1>
+        <Link style={{ textDecoration: "none" }} to="/">
+          <h3
+            style={{
+              color: "white",
+              cursor: "pointer",
+            }}
+          >
+            Accueil
+          </h3>
+        </Link>
       </div>
 
       <form
