@@ -14,6 +14,8 @@ const Form = () => {
         name,
         city,
       });
+      setName("");
+      setCity("");
       console.log(result);
       if (result.data.success) {
         setError("");
