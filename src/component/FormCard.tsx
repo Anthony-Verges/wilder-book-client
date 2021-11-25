@@ -2,13 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const Form = () => {
+const FormCard = () => {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
       const result = await axios.post("http://localhost:5000/api/wilders", {
         name,
@@ -20,7 +19,7 @@ const Form = () => {
       if (result.data.success) {
         setError("");
       }
-    } catch (error) {
+    } catch (error: any) {
       if (error.response) {
         setError(error.response.data.message);
       } else {
@@ -71,7 +70,10 @@ const Form = () => {
           paddingBottom: "2rem",
           paddingTop: "2rem",
         }}
-        onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
       >
         <label
           style={{
@@ -153,4 +155,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default FormCard;

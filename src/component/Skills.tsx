@@ -1,6 +1,13 @@
+import React from "react";
 import { useState } from "react";
 
-const Skills = ({ skillsTitle, skillsVote }) => {
+const Skills = ({
+  skillsTitle,
+  skillsVote,
+}: {
+  skillsTitle: string;
+  skillsVote: number;
+}): JSX.Element => {
   const [voteSkill, setVoteSkill] = useState(skillsVote);
 
   const handleClickVote = () => {
@@ -29,7 +36,10 @@ const Skills = ({ skillsTitle, skillsVote }) => {
           color: "#F76C6C",
           cursor: "pointer",
         }}
-        onClick={handleClickVote}
+        onClick={(e) => {
+          e.preventDefault();
+          handleClickVote();
+        }}
       >
         {voteSkill}
       </div>
